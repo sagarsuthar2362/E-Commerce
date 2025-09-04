@@ -1,0 +1,24 @@
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
+@import "tailwindcss";
+
+*{
+  font-family: Outfit, sans-serif;
+}
+
+a.active hr {
+  display: block;
+}
+
+#sidebar a.active {
+  background: #000;
+  color: #fff;
+}
+
+#hero-text {
+  font-family: fantasy;
+}
+
+
+::-webkit-scrollbar{
+  display: none;
+}

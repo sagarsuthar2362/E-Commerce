@@ -64,4 +64,24 @@ export const Register = async (req, res, next) => {
   }
 };
 
-export const AdminLogin = async (req, res, next) => {};
+export const AdminLogin = async (req, res, next) => {
+  try {
+    const { email, password } = req.body;
+
+    if (
+      email === process.env.ADMIN_EMAIL &&
+      password === process.env.ADMIN_PASSWORD
+    ) {
+      const token = jwt.sign({email ,password}, process.env.TOKEN_SECRET);
+      res.cookie(token);
+
+      return res.json({
+        message: "Login successfull",
+        token,
+      });
+    }
+    throw { status: 401, message: "Invalid credentials" };
+  } catch (error) {
+    next(error);
+  }
+};

@@ -22,3 +22,7 @@ a.active hr {
 ::-webkit-scrollbar{
   display: none;
 }
+
+#adminSidebar a.active{
+ background: #e738381a;
+}

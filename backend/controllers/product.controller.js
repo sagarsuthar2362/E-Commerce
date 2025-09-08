@@ -56,8 +56,51 @@ export const addProduct = async (req, res, next) => {
 };
 
 export const listProducts = async (req, res, next) => {
-  
- };
+  try {
+    console.log(req.user)
+    const allProducts = await Product.find();
 
-export const listSingleProduct = async (req, res, next) => {};
-export const deleteProduct = async (req, res, next) => {};
+    return res.status(200).json({
+      allProducts,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const listSingleProduct = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const item = await Product.findById(id);
+
+    if (!item) {
+      throw { status: 404, message: "Product now found" };
+    }
+    res.status(200).json({
+      message: "Product available in db",
+      item,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const deleteProduct = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const deletedProduct = await Product.findByIdAndDelete(id);
+
+    if (!deletedProduct) {
+      throw { status: 404, message: "No product to delete" };
+    }
+
+    return res.status(200).json({
+      message: "product deleted successfully",
+      deletedProduct,
+    });
+  } catch (error) {
+    next(error);
+  }
+};

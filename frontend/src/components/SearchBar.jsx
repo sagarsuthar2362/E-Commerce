@@ -12,7 +12,7 @@ const SearchBar = () => {
 
   if (showSearch && location === "/collection")
     return (
-      <div className="">
+      <div className="my-5">
         <div className="flex items-center gap-2 justify-center">
           <div className="border border-gray-500 sm:w-5/12 w-ful flex items-center rounded-full px-2">
             <input

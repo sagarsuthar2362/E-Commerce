@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { ShopContext } from "../context/ShopContext";
-import { MdDelete } from "react-icons/md";
+// import { MdDelete } from "react-icons/md";
 import { assets } from "../assets/frontend_assets/assets";
 import Title from "../components/Title";
 import TotalPrice from "../components/TotalPrice";

@@ -26,6 +26,7 @@ const AdminLogin = () => {
       );
       const token = res.data?.token;
       if (token) {
+        localStorage.setItem("token", token);
         navigate("/admin");
       }
     } catch (error) {

@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 
 export const adminAuth = (req, res, next) => {
-  const token = req.headers.cookie?.split("=")[0];
+  const token = req.headers.authorization.split(" ")[1];
   if (!token) {
     throw { status: 401, message: "Unauthorized access" };
   }

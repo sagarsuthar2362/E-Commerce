@@ -59,7 +59,8 @@ const Navbar = () => {
           className="w-5 cursor-pointer"
         />
 
-        <Link to={"/login"} onClick={() => setProfileOpen(!profileOpen)}>
+        <div className="relative">
+            <Link to={"/login"} onClick={() => setProfileOpen(!profileOpen)}>
           <img
             src={assets.profile_icon}
             alt=""
@@ -74,6 +75,7 @@ const Navbar = () => {
             <p>logout</p>
           </div>
         )}
+      </div>
 
         <Link to="/cart" className="w-5 cursor-pointer relative">
           <img src={assets.cart_icon} alt="" />

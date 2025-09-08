@@ -12,7 +12,6 @@ export const addProduct = async (req, res, next) => {
       subCategory,
       sizes,
       bestseller,
-      date,
     } = req.body;
 
     const image1 = req.files.image1 && req.files.image1[0];
@@ -57,7 +56,6 @@ export const addProduct = async (req, res, next) => {
 
 export const listProducts = async (req, res, next) => {
   try {
-    console.log(req.user)
     const allProducts = await Product.find();
 
     return res.status(200).json({

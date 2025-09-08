@@ -1,17 +1,31 @@
 import React from "react";
 import { assets } from "../assets/admin_assets/assets";
-import { Link, NavLink, Outlet, useLocation } from "react-router-dom";
+import {
+  Link,
+  NavLink,
+  Outlet,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import addProducts from "./AddProduct";
 
 const AdminLayout = () => {
   const location = useLocation().pathname;
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate("/admin/login");
+  };
 
   return (
     <div className="h-screen">
       <nav className="flex items-center justify-between border-b border-gray-300 md:px-12 px-2 py-2">
         <img src={assets.logo} alt="" className="h-15" />
 
-        <button className="bg-red-500 text-white rounded-xl px-4 py-1 cursor-pointer text-sm">
+        <button
+          className="bg-red-500 text-white rounded-xl px-4 py-1 cursor-pointer text-sm"
+          onClick={handleLogout}
+        >
           Logout
         </button>
       </nav>
@@ -48,7 +62,7 @@ const AdminLayout = () => {
         </div>
 
         {/* admin sections */}
-        <div className="bg-red-200 flex-1 p-8">
+        <div className="flex-1 p-8">
           <Outlet />
         </div>
       </section>

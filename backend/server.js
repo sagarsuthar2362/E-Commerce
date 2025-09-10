@@ -7,6 +7,7 @@ import "dotenv/config";
 import ProductRouter from "./routes/product.routes.js";
 import { upload } from "./middlewares/multer.js";
 import { connectCloudinary } from "./config/cloudinary.js";
+import OrderRouter from "./routes/order.routes.js";
 
 // app config
 const app = express();
@@ -22,6 +23,8 @@ app.use(cors());
 // endpoints
 app.use("/api/user", UserRouter);
 app.use("/api/product", ProductRouter);
+app.use("/api/order", OrderRouter);
+
 
 // error handling middleware
 app.use(errorHandler);

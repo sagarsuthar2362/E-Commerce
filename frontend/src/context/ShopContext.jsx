@@ -51,8 +51,7 @@ export const ShopContextProvider = ({ children }) => {
   }
 
   const price = cartItems.map((item) => item.price * item.quantity);
-  const subtotal = price.reduce((acc,curr)=>acc+curr,0)
-  
+  const subtotal = price.reduce((acc, curr) => acc + curr, 0);
 
   // console.log("cart items", cartItems);
 
@@ -69,7 +68,7 @@ export const ShopContextProvider = ({ children }) => {
     updateQty,
     cartItems,
     subtotal,
-    price
+    price,
   };
 
   return <ShopContext.Provider value={value}>{children}</ShopContext.Provider>;

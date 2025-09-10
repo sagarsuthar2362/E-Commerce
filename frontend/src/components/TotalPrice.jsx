@@ -10,7 +10,7 @@ const TotalPrice = () => {
   return (
     <div>
       {" "}
-      <div className="mt-10 flex flex-col justify-self-end md:w-full gap-3">
+      <div className="mt-10 flex flex-col justify-self-end w-full gap-3">
         <Title text1={"cart"} text2={"totals"} />
 
         <div className="divide-y divide-gray-300 w-full ">
@@ -41,28 +41,9 @@ const TotalPrice = () => {
           </div>
         </div>
 
-        {location === "/place-order" && (
-          <div>
-            <Title text1={"payment"} text2={"method"} size={"xl"} />
-
-            <div className="grid grid-cols-3 gap-5 ">
-              <div className=" flex gap-2 border p-2 border-gray-300">
-                <input type="radio" name="payment_method" value="stripe" />
-                <img src={assets.stripe_logo} alt="" className="h-6" />
-              </div>
-
-              <div className=" flex gap-2 border p-2 border-gray-300">
-                <input type="radio" name="payment_method" value="razorpay" />
-                <img src={assets.razorpay_logo} alt="" className="h-6" />
-              </div>
-
-              <div className=" flex gap-2 border p-2 border-gray-300">
-                <input type="radio" name="payment_method" value="cod" />
-                <p className="uppercase text-gray-500">cash on delivery</p>
-              </div>
-            </div>
-          </div>
-        )}
+        {/* {location === "/place-order" && (
+   
+        )} */}
       </div>
     </div>
   );

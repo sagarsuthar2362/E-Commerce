@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { assets } from "../assets/frontend_assets/assets";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { ShopContext } from "../context/ShopContext";
 
 const Navbar = () => {
@@ -8,9 +8,20 @@ const Navbar = () => {
   const [profileOpen, setProfileOpen] = useState(false);
   const { setShowSearch, showSearch } = useContext(ShopContext);
   const { cartItems } = useContext(ShopContext);
+
+  // number of items in cart
   const cartItemsQuantity = cartItems
     .map((item) => item.quantity)
     .reduce((acc, curr) => acc + curr, 0);
+
+  // navigate
+  const navigate = useNavigate();
+
+  const token = localStorage.getItem("token");
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate("/");
+  };
 
   return (
     <div className="flex items-center justify-between border-b pb-4 border-gray-300">
@@ -59,23 +70,30 @@ const Navbar = () => {
           className="w-5 cursor-pointer"
         />
 
-        <div className="relative">
-            <Link to={"/login"} onClick={() => setProfileOpen(!profileOpen)}>
+        <div className="group relative cursor-pointer">
           <img
             src={assets.profile_icon}
-            alt=""
-            className="w-5 cursor-pointer group"
+            className="w-5"
+            onClick={() => {
+              if (!token) {
+                navigate("/login");
+              }
+            }}
           />
-        </Link>
 
-        {profileOpen && (
-          <div className="absolute bg-gray-300 top-15 capitalize p-3 md:w-[140px] w-screen left-0 space-y-2 md:right-44">
-            <p>my profile</p>
-            <p>orders</p>
-            <p>logout</p>
-          </div>
-        )}
-      </div>
+          {token && (
+            <div className="group-hover:block hidden absolute right-0 top-6 bg-slate-100 p-4">
+              <div className="px-8 space-y-5">
+                <Link to={"/orders"} className="cursor-pointer">
+                  Orders
+                </Link>
+                <p className="cursor-pointer" onClick={handleLogout}>
+                  Logout
+                </p>
+              </div>
+            </div>
+          )}
+        </div>
 
         <Link to="/cart" className="w-5 cursor-pointer relative">
           <img src={assets.cart_icon} alt="" />

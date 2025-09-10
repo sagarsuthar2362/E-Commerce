@@ -72,7 +72,7 @@ export const AdminLogin = async (req, res, next) => {
       email === process.env.ADMIN_EMAIL &&
       password === process.env.ADMIN_PASSWORD
     ) {
-      const token = jwt.sign({email ,password}, process.env.TOKEN_SECRET);
+      const token = jwt.sign({ email, password }, process.env.TOKEN_SECRET);
       res.cookie(token);
 
       return res.json({

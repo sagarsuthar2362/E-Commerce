@@ -5,6 +5,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const backendApi = import.meta.env.VITE_BACKEND_URL;
   const navigate = useNavigate();
   const [currentState, setCurrentState] = useState("Sign Up");
   const [formData, setFormData] = useState({
@@ -42,7 +43,10 @@ const Login = () => {
     toast.success(res?.data?.message, {
       theme: "dark",
     });
-    navigate("/", { state: { successMessage: "Logged in successfully" } ,replace:true});
+    navigate("/", {
+      state: { successMessage: "Logged in successfully" },
+      replace: true,
+    });
   };
 
   const handleSubmit = async (e) => {
@@ -52,8 +56,8 @@ const Login = () => {
 
       const url =
         currentState === "Sign Up"
-          ? "http://localhost:3000/api/user/register"
-          : "http://localhost:3000/api/user/login";
+          ? `${backendApi}/api/user/register`
+          : `${backendApi}/api/user/login`;
 
       const res = await axios.post(url, formData);
       handleAuthSuccess(res);

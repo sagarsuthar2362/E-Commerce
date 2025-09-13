@@ -6,12 +6,13 @@ import axios from "axios";
 import { useState } from "react";
 
 const Orders = () => {
+  const backendApi = import.meta.env.VITE_BACKEND_URL;
   const { products, currency } = useContext(ShopContext);
   const [orders, setOrders] = useState([]);
 
   const fetchMyOrders = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/api/order/my-orders", {
+      const res = await axios.get(`${backendApi}/api/order/my-orders`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },

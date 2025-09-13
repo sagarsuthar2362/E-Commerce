@@ -4,11 +4,12 @@ import { assets } from "../assets/admin_assets/assets";
 import { toast, ToastContainer } from "react-toastify";
 
 const ListProducts = () => {
+  const backendApi = import.meta.env.VITE_BACKEND_URL;
   const [products, setProducts] = useState([]);
 
   const fetchData = async () => {
     try {
-      let res = await axios.get("http://localhost:3000/api/product/all");
+      let res = await axios.get(`${backendApi}/api/product/all`);
       setProducts(res.data.allProducts);
     } catch (error) {
       console.log(error);
@@ -18,7 +19,7 @@ const ListProducts = () => {
   const handleDelete = async (id) => {
     try {
       const res = await axios.delete(
-        `http://localhost:3000/api/product/delete/${id}`,
+        `${backendApi}/api/product/delete/${id}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -27,7 +28,7 @@ const ListProducts = () => {
       );
       console.log(res);
       toast.success(res.data?.message, {
-        theme:"dark"
+        theme: "dark",
       });
     } catch (error) {
       console.log(error);

@@ -3,6 +3,7 @@ import axios from "axios";
 import Title from "./Title";
 
 const AdminOrders = () => {
+  const backendApi = import.meta.env.VITE_BACKEND_URL;
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -10,13 +11,12 @@ const AdminOrders = () => {
   const fetchOrders = async () => {
     try {
       setLoading(true);
-      const res = await axios.get("http://localhost:3000/api/order/list", {
+      const res = await axios.get(`${backendApi}/api/order/list`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
       setOrders(res.data.orders || []);
-    
     } catch (error) {
       console.log("Error fetching orders:", error);
     } finally {
@@ -28,7 +28,7 @@ const AdminOrders = () => {
   const updateOrderStatus = async (id, status) => {
     try {
       await axios.put(
-        `http://localhost:3000/api/order/status/${id}`,
+        `${backendApi}/api/order/status/${id}`,
         { status },
         {
           headers: {
@@ -80,7 +80,7 @@ const AdminOrders = () => {
                   {item.address?.state}, {item.address?.zipcode},{" "}
                   {item.address?.country}
                 </td>
-                <td>{ new Date(item.date).toLocaleDateString()}</td>
+                <td>{new Date(item.date).toLocaleDateString()}</td>
                 <td className="p-2">{item.paymentMethod}</td>
                 <td className="p-2">
                   <select

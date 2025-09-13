@@ -7,6 +7,8 @@ import axios from "axios";
 import { ShopContext } from "../context/ShopContext";
 
 const PlaceOrder = () => {
+  const backendApi = import.meta.env.VITE_BACKEND_URL;
+
   const navigate = useNavigate();
   const { cartItems, price, subtotal, delivery_fees, clearCart } =
     useContext(ShopContext);
@@ -51,15 +53,11 @@ const PlaceOrder = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(
-        "http://localhost:3000/api/order",
-        formData,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      );
+      const res = await axios.post(`${backendApi}/api/order`, formData, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
       if (res.status === 201) {
         await clearCart();
         navigate("/orders");

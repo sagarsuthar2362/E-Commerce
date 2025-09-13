@@ -4,6 +4,7 @@ import { toast, ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 const AdminLogin = () => {
+  const backendApi = import.meta.env.VITE_BACKEND_URL;
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -21,7 +22,7 @@ const AdminLogin = () => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        "http://localhost:3000/api/user/admin",
+        `${backendApi}/api/user/admin`,
         formData
       );
       const token = res.data?.token;

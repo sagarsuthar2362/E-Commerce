@@ -4,6 +4,8 @@ import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 
 const AddProducts = () => {
+  const backendApi = import.meta.env.VITE_BACKEND_URL;
+
   const [formData, setFormData] = useState({
     name: "",
     description: "",
@@ -76,7 +78,7 @@ const AddProducts = () => {
       // old promise ****************************************
 
       await toast.promise(
-        axios.post("http://localhost:3000/api/product/add", data, {
+        axios.post(`${backendApi}/api/product/add`, data, {
           headers: {
             "Content-Type": "multipart/form-data",
             Authorization: `Bearer ${localStorage.getItem("token")}`,

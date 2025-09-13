@@ -25,7 +25,6 @@ app.use("/api/user", UserRouter);
 app.use("/api/product", ProductRouter);
 app.use("/api/order", OrderRouter);
 
-
 // error handling middleware
 app.use(errorHandler);
 

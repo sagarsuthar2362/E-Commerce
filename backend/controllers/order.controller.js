@@ -64,7 +64,6 @@ export const myOrders = async (req, res, next) => {
   try {
     const userId = req.user.id;
     const user = await User.findById(userId).populate("orders");
-    
 
     if (!user) {
       throw { message: "User not found", status: 404 };
@@ -74,7 +73,6 @@ export const myOrders = async (req, res, next) => {
       message: "User fetched successfully",
       orders: user.orders,
     });
-
   } catch (error) {
     next(error);
   }

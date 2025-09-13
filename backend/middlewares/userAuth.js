@@ -1,4 +1,4 @@
-import jwt from 'jsonwebtoken'
+import jwt from "jsonwebtoken";
 
 export const userAuth = (req, res, next) => {
   const token = req.headers.authorization.split(" ")[1];
@@ -10,6 +10,6 @@ export const userAuth = (req, res, next) => {
   if (!token || !decoded) {
     throw { status: 401, message: "Unauthorized access" };
   }
-    req.user = decoded;
+  req.user = decoded;
   next();
 };

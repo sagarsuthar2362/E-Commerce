@@ -5,6 +5,6 @@ const UserRouter = express.Router();
 
 UserRouter.post("/register", Register);
 UserRouter.post("/login", Login);
-UserRouter.post("/admin", upload.none() ,AdminLogin);
+UserRouter.post("/admin", upload.none(), AdminLogin);
 
 export default UserRouter;

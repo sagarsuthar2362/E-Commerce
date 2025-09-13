@@ -1,14 +1,16 @@
 import React, { useContext, useState } from "react";
 import Title from "../components/Title";
 import TotalPrice from "../components/TotalPrice";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { assets } from "../assets/frontend_assets/assets";
 import axios from "axios";
 import { ShopContext } from "../context/ShopContext";
 
 const PlaceOrder = () => {
-  const { cartItems, price, subtotal, delivery_fees } = useContext(ShopContext);
-  const Amount = price + subtotal + delivery_fees;
+  const navigate = useNavigate();
+  const { cartItems, price, subtotal, delivery_fees, clearCart } =
+    useContext(ShopContext);
+  const amount = Number(subtotal + delivery_fees);
   const [paymentMethod, setpaymentMethod] = useState("");
 
   const [formData, setformData] = useState({
@@ -25,7 +27,7 @@ const PlaceOrder = () => {
     phone: "",
     paymentMethod: "",
     cartItems,
-    Amount,
+    amount,
   });
 
   const handleChange = (e) => {
@@ -58,7 +60,10 @@ const PlaceOrder = () => {
           },
         }
       );
-      console.log(res);
+      if (res.status === 201) {
+        await clearCart();
+        navigate("/orders");
+      }
     } catch (error) {
       console.log(error);
     }

@@ -31,7 +31,7 @@ const Navbar = () => {
         </Link>
       </div>
 
-      <ul className="md:flex hidden gap-9 ">
+      <ul className="md:flex items-center hidden gap-9 ">
         <NavLink to={"/"} className="flex flex-col items-center border-none">
           <p>HOME</p>
           <hr className="w-1/2 h-[1.5px] bg-gray-700 hidden" />
@@ -60,6 +60,8 @@ const Navbar = () => {
           <p>CONTACT</p>
           <hr className="w-1/2 h-[1.5px] bg-gray-700 hidden" />
         </NavLink>
+
+        <NavLink to={'/admin/login'} className={`border rounded-full px-5 py-2`}>ADMIN PANEL</NavLink>
       </ul>
 
       <div className="flex items-center gap-8">

@@ -50,6 +50,10 @@ export const ShopContextProvider = ({ children }) => {
     );
   }
 
+  function clearCart() {
+    setCartItems([]);
+  }
+
   const price = cartItems.map((item) => item.price * item.quantity);
   const subtotal = price.reduce((acc, curr) => acc + curr, 0);
 
@@ -66,6 +70,7 @@ export const ShopContextProvider = ({ children }) => {
     addToCart,
     removeFromCart,
     updateQty,
+    clearCart,
     cartItems,
     subtotal,
     price,
